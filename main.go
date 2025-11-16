@@ -14,7 +14,7 @@ func main() {
 	args := os.Args
 
 	game.Game()
-	ui.FirstMessage(cfg.GameMode, cfg.MaxAttempts)
+	ui.FirstMessage(cfg.Mode(), cfg.MaxAttempt())
 
 	fmt.Println("input args: ", args)
 }

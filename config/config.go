@@ -1,21 +1,42 @@
 package config
 
 const (
-	defaultMode = "defmod"
+	defaultMode = "default"
+	botMode     = "bot mode"
 
 	eng = "eng"
 )
 
 type GameConfig struct {
-	GameMode    string
-	MaxAttempts uint
-	Language    string
+	gameMode    string
+	maxAttempts int
+	language    string
 }
 
 func MakeCfg() *GameConfig {
 	return &GameConfig{
-		GameMode:    defaultMode,
-		MaxAttempts: 10,
-		Language:    eng,
+		gameMode:    defaultMode,
+		maxAttempts: 10,
+		language:    eng,
 	}
+}
+
+func (g *GameConfig) Mode() string {
+	return g.gameMode
+}
+
+func (g *GameConfig) MaxAttempt() int {
+	return g.maxAttempts
+}
+
+func (g *GameConfig) Lang() string {
+	return g.language
+}
+
+func (g *GameConfig) DefaultMode() {
+	g.gameMode = defaultMode
+}
+
+func (g *GameConfig) BotMode() {
+	g.gameMode = botMode
 }
