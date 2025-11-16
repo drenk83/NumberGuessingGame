@@ -13,20 +13,19 @@ import (
 
 func main() {
 	modeFlag := flag.String("mode", config.ModeDefault, "game mode")
-	attemptsFlag := flag.Int("attempts", config.DefAttempt, "attempts")
+	attemptsFlag := flag.Int("att", config.DefAttempt, "attempts")
 	langFlag := flag.String("lang", config.Eng, "language eng")
 
 	flag.Parse()
 
 	if err := validFlags(modeFlag, attemptsFlag, langFlag); err != nil {
 		fmt.Println(err)
+		return
 	}
+	cfg := config.MakeCfg(modeFlag, attemptsFlag, langFlag)
 
-	cfg := config.MakeCfg()
-	ui.FirstMessage(cfg)
+	ui.WelcomeMessage(cfg)
 	game.Game()
-
-	fmt.Println("input args:", *modeFlag, *attemptsFlag, *langFlag)
 }
 
 func validFlags(mode *string, att *int, lang *string) error {

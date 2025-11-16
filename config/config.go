@@ -14,13 +14,17 @@ type GameConfig struct {
 	gameMode    string
 	maxAttempts int
 	language    string
+	min         int
+	max         int
 }
 
-func MakeCfg() GameConfig {
+func MakeCfg(m *string, a *int, l *string) GameConfig {
 	return GameConfig{
-		gameMode:    ModeDefault,
-		maxAttempts: DefAttempt,
-		language:    Eng,
+		gameMode:    *m,
+		maxAttempts: *a,
+		language:    *l,
+		min:         1,
+		max:         100,
 	}
 }
 
@@ -34,6 +38,14 @@ func (g *GameConfig) MaxAttempt() int {
 
 func (g *GameConfig) Lang() string {
 	return g.language
+}
+
+func (g *GameConfig) Min() int {
+	return g.min
+}
+
+func (g *GameConfig) Max() int {
+	return g.max
 }
 
 func (g *GameConfig) ModeDefault() {
