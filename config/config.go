@@ -1,10 +1,13 @@
 package config
 
 const (
-	defaultMode = "default"
-	botMode     = "bot mode"
+	ModeDefault = "default"
+	ModeBot     = "botmode"
 
-	eng = "eng"
+	DefAttempt = 7
+
+	Eng = "eng"
+	Rus = "ru"
 )
 
 type GameConfig struct {
@@ -13,11 +16,11 @@ type GameConfig struct {
 	language    string
 }
 
-func MakeCfg() *GameConfig {
-	return &GameConfig{
-		gameMode:    defaultMode,
-		maxAttempts: 10,
-		language:    eng,
+func MakeCfg() GameConfig {
+	return GameConfig{
+		gameMode:    ModeDefault,
+		maxAttempts: DefAttempt,
+		language:    Eng,
 	}
 }
 
@@ -33,10 +36,10 @@ func (g *GameConfig) Lang() string {
 	return g.language
 }
 
-func (g *GameConfig) DefaultMode() {
-	g.gameMode = defaultMode
+func (g *GameConfig) ModeDefault() {
+	g.gameMode = ModeDefault
 }
 
-func (g *GameConfig) BotMode() {
-	g.gameMode = botMode
+func (g *GameConfig) ModeBot() {
+	g.gameMode = ModeBot
 }
