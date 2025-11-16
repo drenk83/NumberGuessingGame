@@ -1,5 +1,11 @@
 package config
 
+import (
+	"errors"
+
+	"github.com/drenk83/NumberGuessingGame/ui"
+)
+
 const (
 	ModeDefault = "default"
 	ModeBot     = "botmode"
@@ -28,11 +34,13 @@ func MakeCfg(m *string, a *int, l *string) GameConfig {
 	}
 }
 
+// Getters
+// ---------------------------------
 func (g *GameConfig) Mode() string {
 	return g.gameMode
 }
 
-func (g *GameConfig) MaxAttempt() int {
+func (g *GameConfig) MaxAtt() int {
 	return g.maxAttempts
 }
 
@@ -48,10 +56,58 @@ func (g *GameConfig) Max() int {
 	return g.max
 }
 
-func (g *GameConfig) ModeDefault() {
-	g.gameMode = ModeDefault
+// Setters
+// --------------------------------
+func (g *GameConfig) SetMode(m string) error {
+	switch m {
+	case ModeDefault:
+		g.gameMode = ModeDefault
+		return nil
+
+	case ModeBot:
+		g.gameMode = ModeBot
+		return nil
+
+	default:
+		return errors.New("[ERROR] in changing the mode")
+	}
 }
 
-func (g *GameConfig) ModeBot() {
-	g.gameMode = ModeBot
+func (g *GameConfig) SetLang(l string) error {
+	switch l {
+	case Eng:
+		g.language = Eng
+		ui.SetLangMsg(g.language)
+		return nil
+
+	case Rus:
+		g.language = Rus
+		ui.SetLangMsg(g.language)
+		return nil
+
+	default:
+		return errors.New("[ERROR] in changing the language")
+	}
+}
+
+func (g *GameConfig) SetAttempts(a int) error {
+	if a <= 0 {
+		return errors.New("[ERROR] Zero or negative number of attempts")
+	}
+	ui.SetAttemptsMsg(g.language, g.maxAttempts, a)
+	g.maxAttempts = a
+	return nil
+}
+
+func (g *GameConfig) SetMinMax(mn, mx int) error {
+	if mn > mx {
+		return errors.New("[ERROR] Min is more than max")
+	}
+	if mn == mx {
+		return errors.New("[ERROR] Same values")
+	}
+	ui.SetMinMaxMsg(g.language, g.min, mn, g.max, mx)
+	g.min = mn
+	g.max = mx
+	return nil
 }
