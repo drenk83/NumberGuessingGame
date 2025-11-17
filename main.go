@@ -25,7 +25,7 @@ func main() {
 	cfg := config.MakeCfg(modeFlag, attemptsFlag, langFlag)
 
 	ui.WelcomeMessage(cfg.Mode(), cfg.MaxAtt(), cfg.Lang(), cfg.Min(), cfg.Max())
-	game.Game()
+	game.Game(cfg)
 }
 
 func validFlags(mode *string, att *int, lang *string) error {
