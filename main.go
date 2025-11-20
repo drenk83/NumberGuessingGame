@@ -25,6 +25,7 @@ func main() {
 	cfg := config.MakeCfg(modeFlag, attemptsFlag, langFlag)
 
 	ui.WelcomeMessage(cfg.Mode(), cfg.MaxAtt(), cfg.Lang(), cfg.Min(), cfg.Max())
+	fmt.Println(ui.MenuInput())
 	game.Game(cfg)
 }
 
