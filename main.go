@@ -4,6 +4,7 @@ import (
 	e "errors"
 	"flag"
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/drenk83/NumberGuessingGame/config"
@@ -24,8 +25,9 @@ func main() {
 	}
 	cfg := config.MakeCfg(modeFlag, attemptsFlag, langFlag)
 
-	ui.WelcomeMessage(cfg.Mode(), cfg.MaxAtt(), cfg.Lang(), cfg.Min(), cfg.Max())
-	fmt.Println(ui.MenuInput())
+	ui.WelcomeMessage(cfg)
+	ui.Menu(cfg.Lang())
+	validInput()
 	game.Game(cfg)
 }
 
@@ -62,4 +64,28 @@ func validFlags(mode *string, att *int, lang *string) error {
 		*lang = config.Eng
 	}
 	return nil
+}
+
+// нужно будет подумать над указателями чтоб структуру передать
+func validInput() {
+	whileInput := true
+	for whileInput {
+		switch ui.MenuInput() {
+		case 1:
+			whileInput = false
+		case 2:
+
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+			ExitGame()
+		default:
+
+		}
+	}
+}
+
+func ExitGame() {
+	os.Exit(1)
 }

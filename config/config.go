@@ -2,8 +2,6 @@ package config
 
 import (
 	"errors"
-
-	"github.com/drenk83/NumberGuessingGame/ui"
 )
 
 const (
@@ -73,16 +71,22 @@ func (g *GameConfig) SetMode(m string) error {
 	}
 }
 
+func (g *GameConfig) SwapMode() {
+	if g.gameMode == ModeDefault {
+		g.gameMode = ModeBot
+	} else {
+		g.gameMode = ModeDefault
+	}
+}
+
 func (g *GameConfig) SetLang(l string) error {
 	switch l {
 	case Eng:
 		g.language = Eng
-		ui.SetLangMsg(g.language)
 		return nil
 
 	case Rus:
 		g.language = Rus
-		ui.SetLangMsg(g.language)
 		return nil
 
 	default:
@@ -94,7 +98,6 @@ func (g *GameConfig) SetAttempts(a int) error {
 	if a <= 0 {
 		return errors.New("[ERROR] Zero or negative number of attempts")
 	}
-	ui.SetAttemptsMsg(g.language, g.maxAttempts, a)
 	g.maxAttempts = a
 	return nil
 }
@@ -106,7 +109,6 @@ func (g *GameConfig) SetMinMax(mn, mx int) error {
 	if mn == mx {
 		return errors.New("[ERROR] Same values")
 	}
-	ui.SetMinMaxMsg(g.language, g.min, mn, g.max, mx)
 	g.min = mn
 	g.max = mx
 	return nil

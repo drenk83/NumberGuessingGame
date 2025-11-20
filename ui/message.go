@@ -2,28 +2,34 @@ package ui
 
 import (
 	"fmt"
+
+	"github.com/drenk83/NumberGuessingGame/config"
 )
 
-const (
-	eng = "eng"
-	rus = "ru"
-)
-
-func WelcomeMessage(mode string, att int, lang string, min, max int) {
-	switch lang {
-	case eng:
+func WelcomeMessage(c config.GameConfig) {
+	switch c.Lang() {
+	case config.Eng:
 		fmt.Println("Welcome to the \"Number Guessing Game\"!")
-		fmt.Println("Game mode:", mode)
-		fmt.Println("Number of attempts:", att)
-		fmt.Println("Secret number range from", min, "to", max)
+		fmt.Println("Game mode:", c.Mode())
+		fmt.Println("Number of attempts:", c.MaxAtt())
+		fmt.Println("Secret number range from", c.Min(), "to", c.Max())
 		fmt.Print("\n\n")
 		engChoice()
-	case rus:
+	case config.Rus:
 		fmt.Println("Добро пожаловать в \"Number Guessing Game\"!")
-		fmt.Println("Режим игры:", mode)
-		fmt.Println("Количество попыток:", att)
-		fmt.Println("Загадываемое число от", min, "до", max)
+		fmt.Println("Режим игры:", c.Mode())
+		fmt.Println("Количество попыток:", c.MaxAtt())
+		fmt.Println("Загадываемое число от", c.Min(), "до", c.Max())
 		fmt.Print("\n\n")
+		rusChoice()
+	}
+}
+
+func Menu(lang string) {
+	switch lang {
+	case config.Eng:
+		engChoice()
+	case config.Rus:
 		rusChoice()
 	}
 }
@@ -51,7 +57,7 @@ func engChoice() {
 // For Setters
 // ---------------------------
 func SetLangMsg(l string) {
-	if l == eng {
+	if l == config.Eng {
 		fmt.Println("Language changed successfully!")
 	} else {
 		fmt.Println("Язык успешно изменён!")
@@ -59,7 +65,7 @@ func SetLangMsg(l string) {
 }
 
 func SetModeMsg(l string) {
-	if l == eng {
+	if l == config.Eng {
 		fmt.Println("Mode changed successfully!")
 	} else {
 		fmt.Println("Режим успешно изменён!")
@@ -67,7 +73,7 @@ func SetModeMsg(l string) {
 }
 
 func SetAttemptsMsg(l string, old int, new int) {
-	if l == eng {
+	if l == config.Eng {
 		fmt.Println("Number of attempts has been successfully changed:", old, "→", new)
 	} else {
 		fmt.Println("Количество попыток успешно изменено:", old, "→", new)
@@ -75,7 +81,7 @@ func SetAttemptsMsg(l string, old int, new int) {
 }
 
 func SetMinMaxMsg(l string, oldmin, newmin, oldmax, newmax int) {
-	if l == eng {
+	if l == config.Eng {
 		fmt.Println("The range of values has been successfully changed!")
 		fmt.Println("Min:", oldmin, "→", newmin)
 		fmt.Println("Max:", oldmax, "→", newmax)
