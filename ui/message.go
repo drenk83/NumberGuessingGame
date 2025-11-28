@@ -6,30 +6,30 @@ import (
 	"github.com/drenk83/NumberGuessingGame/config"
 )
 
-func WelcomeMessage(c config.GameConfig) {
-	switch c.Lang() {
-	case config.Eng:
+func WelcomeMessage(c *config.GameConfig) {
+	switch c.Language() {
+	case config.LangEng:
 		fmt.Println("Welcome to the \"Number Guessing Game\"!")
 		fmt.Println("Game mode:", c.Mode())
-		fmt.Println("Number of attempts:", c.MaxAtt())
-		fmt.Println("Secret number range from", c.Min(), "to", c.Max())
+		fmt.Println("Number of attempts:", c.MaxAttempts())
+		fmt.Println("Secret number range from", 1, "to", c.MaxNumber())
 		fmt.Print("\n\n")
 		engChoice()
-	case config.Rus:
+	case config.LangRus:
 		fmt.Println("Добро пожаловать в \"Number Guessing Game\"!")
 		fmt.Println("Режим игры:", c.Mode())
-		fmt.Println("Количество попыток:", c.MaxAtt())
-		fmt.Println("Загадываемое число от", c.Min(), "до", c.Max())
+		fmt.Println("Количество попыток:", c.MaxAttempts())
+		fmt.Println("Загадываемое число от", 1, "до", c.MaxNumber())
 		fmt.Print("\n\n")
 		rusChoice()
 	}
 }
 
-func Menu(lang string) {
-	switch lang {
-	case config.Eng:
+func Menu(l config.Language) {
+	switch l {
+	case config.LangEng:
 		engChoice()
-	case config.Rus:
+	case config.LangRus:
 		rusChoice()
 	}
 }
@@ -56,52 +56,38 @@ func engChoice() {
 
 // For Setters
 // ---------------------------
-func SetLangMsg(l string) {
-	if l == config.Eng {
-		fmt.Println("Language changed successfully!")
-	} else {
-		fmt.Println("Язык успешно изменён!")
-	}
-}
+// func SetLangMsg(l string) {
+// 	if l == config.Eng {
+// 		fmt.Println("Language changed successfully!")
+// 	} else {
+// 		fmt.Println("Язык успешно изменён!")
+// 	}
+// }
 
-func SetModeMsg(l string) {
-	if l == config.Eng {
-		fmt.Println("Mode changed successfully!")
-	} else {
-		fmt.Println("Режим успешно изменён!")
-	}
-}
+// func SetModeMsg(l string) {
+// 	if l == config.Eng {
+// 		fmt.Println("Mode changed successfully!")
+// 	} else {
+// 		fmt.Println("Режим успешно изменён!")
+// 	}
+// }
 
-func SetAttemptsMsg(l string, old int, new int) {
-	if l == config.Eng {
-		fmt.Println("Number of attempts has been successfully changed:", old, "→", new)
-	} else {
-		fmt.Println("Количество попыток успешно изменено:", old, "→", new)
-	}
-}
+// func SetAttemptsMsg(l string, old int, new int) {
+// 	if l == config.Eng {
+// 		fmt.Println("Number of attempts has been successfully changed:", old, "→", new)
+// 	} else {
+// 		fmt.Println("Количество попыток успешно изменено:", old, "→", new)
+// 	}
+// }
 
-func SetMinMaxMsg(l string, oldmin, newmin, oldmax, newmax int) {
-	if l == config.Eng {
-		fmt.Println("The range of values has been successfully changed!")
-		fmt.Println("Min:", oldmin, "→", newmin)
-		fmt.Println("Max:", oldmax, "→", newmax)
-	} else {
-		fmt.Println("Диапазон значений успешно изменён!")
-		fmt.Println("Мин:", oldmin, "→", newmin)
-		fmt.Println("Макс:", oldmax, "→", newmax)
-	}
-}
-
-// Errors
-// ---------------------------
-func ToManyArgs() {
-	fmt.Println("------------------------------------------------------------")
-	fmt.Println("[WRN] Too many arguments. Invalid arguments will be ignored.")
-	fmt.Println("------------------------------------------------------------")
-}
-
-func InvalidArg(arg, def string) {
-	fmt.Println("------------------------------------------------------------")
-	fmt.Println("[ERR] Unknow arrgument:", arg, "— using default value:", def)
-	fmt.Println("------------------------------------------------------------")
-}
+// func SetMinMaxMsg(l string, oldmin, newmin, oldmax, newmax int) {
+// 	if l == config.Eng {
+// 		fmt.Println("The range of values has been successfully changed!")
+// 		fmt.Println("Min:", oldmin, "→", newmin)
+// 		fmt.Println("Max:", oldmax, "→", newmax)
+// 	} else {
+// 		fmt.Println("Диапазон значений успешно изменён!")
+// 		fmt.Println("Мин:", oldmin, "→", newmin)
+// 		fmt.Println("Макс:", oldmax, "→", newmax)
+// 	}
+// }

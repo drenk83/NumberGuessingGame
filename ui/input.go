@@ -14,7 +14,7 @@ func MenuInput() int {
 		fmt.Print("Введите число: ")
 		inputStr, err := reader.ReadString('\n')
 		if err != nil {
-			fmt.Printf("[ERR] Ошибка чтения: %v\n", err)
+			fmt.Printf("[ERROR] Ошибка чтения: %v\n", err)
 			continue
 		}
 
@@ -24,6 +24,6 @@ func MenuInput() int {
 			return input
 		}
 
-		fmt.Printf("[ERR] '%s' не является числом. Попробуйте снова.\n", inputStr)
+		fmt.Printf("[ERROR] '%s' не является числом. Попробуйте снова.\n", inputStr)
 	}
 }

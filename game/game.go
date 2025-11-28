@@ -1,45 +1,41 @@
 package game
 
 import (
-	"fmt"
 	"math/rand"
 
 	"github.com/drenk83/NumberGuessingGame/config"
 )
 
 type GameRule struct {
-	randNumber int
-	attempts   []int
-	lenAtt     int
-	maxAtt     int
+	randNumber      int
+	attempts        []int
+	counterAttempts int
 }
 
-func Game(cfg config.GameConfig) {
-	var randNum int
+func GameInit(cfg *config.GameConfig) {
+	random := rand.Intn(cfg.MaxNumber())
+	gr := NewGameRule(random, cfg.MaxAttempts())
 
 	switch cfg.Mode() {
-	case config.ModeDefault:
-		for randNum = rand.Intn(cfg.Max()); randNum == 0; {
-			randNum = rand.Intn(cfg.Max())
-		}
-	case config.ModeBot:
-		randNum = UserInput()
+	case config.ClassicMode:
+		ClassicGame(gr)
+	case config.TimedMode:
+		TimeGame(gr)
 	}
-
-	g := MakeGame(cfg, randNum)
-
-	fmt.Println(*g)
 }
 
-func MakeGame(c config.GameConfig, r int) *GameRule {
+func ClassicGame(g *GameRule) {
+
+}
+
+func TimeGame(g *GameRule) {
+
+}
+
+func NewGameRule(r, m int) *GameRule {
 	return &GameRule{
-		randNumber: r,
-		attempts:   make([]int, 0, c.MaxAtt()),
-		lenAtt:     0,
-		maxAtt:     c.MaxAtt(),
+		randNumber:      r,
+		attempts:        make([]int, 0, m),
+		counterAttempts: 0,
 	}
-}
-
-func UserInput() int {
-	return 123
 }
